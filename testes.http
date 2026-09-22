@@ -1,0 +1,47 @@
+### Criar correntista
+POST http://localhost:8080/correntistas
+Content-Type: application/json
+
+{
+    "nome": "João Vittor",
+    "documento": "12345678900",
+    "email": "joao@teste.com",
+    "telefone": "83999999999"
+}
+
+### Abrir conta corrente (troca o correntistaId=1 pelo id que voltou acima)
+POST http://localhost:8080/contas?correntistaId=1
+Content-Type: application/json
+
+{
+    "numero": "0001-1",
+    "tipo": "CORRENTE",
+    "limite": 500.00
+}
+
+### Depositar (troca o /1/ pelo id da conta que voltou acima)
+POST http://localhost:8080/contas/1/depositar
+Content-Type: application/json
+
+{
+    "valor": 1000.00
+}
+
+### Sacar
+POST http://localhost:8080/contas/1/sacar
+Content-Type: application/json
+
+{
+    "valor": 200.00
+}
+
+### Ver extrato
+GET http://localhost:8080/contas/1/extrato
+
+### Testar erro (saque maior que saldo+limite)
+POST http://localhost:8080/contas/1/sacar
+Content-Type: application/json
+
+{
+    "valor": 99999.00
+}
